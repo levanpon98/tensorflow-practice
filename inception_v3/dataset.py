@@ -1,5 +1,6 @@
 import pathlib
 import tensorflow as tf
+import config
 
 
 def get_image_label(dataset_dir):
@@ -18,8 +19,8 @@ def get_image_label(dataset_dir):
 
 def preprocess_data(image_path, image_label):
     image_raw = tf.io.read_file(image_path)
-    image_tensor = tf.image.decode_image(image_raw, channels=3)
-    image_tensor = tf.image.resize(image_tensor, [299, 299])
+    image_tensor = tf.image.decode_image(image_raw, channels=config.channels)
+    image_tensor = tf.image.resize(image_tensor, [config.image_height, config.image_width])
     image_tensor = tf.cast(image_tensor, dtype=tf.float32) / 255.
 
     return image_tensor, image_label
@@ -34,12 +35,12 @@ def get_dataset(dataset_dir):
 
 
 def build_dataset():
-    train_dataset, train_count = get_dataset('dataset/train')
-    test_dataset, test_count = get_dataset('dataset/test')
-    valid_dataset, valid_count = get_dataset('dataset/valid')
+    train_dataset, train_count = get_dataset(config.train_dir)
+    test_dataset, test_count = get_dataset(config.test_dir)
+    valid_dataset, valid_count = get_dataset(config.valid_dir)
 
-    train_dataset = train_dataset.shuffle(buffer_size=train_count).batch(32)
-    test_dataset = test_dataset.batch(32)
-    valid_dataset = valid_dataset.batch(32)
+    train_dataset = train_dataset.shuffle(buffer_size=train_count).batch(config.BATCH_SIZE)
+    test_dataset = test_dataset.batch(config.BATCH_SIZE)
+    valid_dataset = valid_dataset.batch(config.BATCH_SIZE)
 
     return train_dataset, train_count, test_dataset, test_count, valid_dataset, valid_count
