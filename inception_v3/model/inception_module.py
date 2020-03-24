@@ -142,7 +142,7 @@ class InceptionModule2(tf.keras.layers.Layer):
                                        padding='valid')
 
         # branch 2
-        self.maxpool = tf.keras.layers.MaxPool2D((3, 3), strides=2, padding='same')
+        self.maxpool = tf.keras.layers.MaxPool2D((3, 3), strides=2, padding='valid')
 
     def call(self, inputs, training=None, **kwargs):
         b0 = self.conv2d_b0(inputs, training=training)

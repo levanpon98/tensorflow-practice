@@ -18,8 +18,10 @@ def get_image_label(dataset_dir):
 
 
 def preprocess_data(image_path, image_label):
+
     image_raw = tf.io.read_file(image_path)
-    image_tensor = tf.image.decode_image(image_raw, channels=config.channels)
+    image_tensor = tf.image.decode_jpeg(image_raw, channels=config.channels)
+
     image_tensor = tf.image.resize(image_tensor, [config.image_height, config.image_width])
     image_tensor = tf.cast(image_tensor, dtype=tf.float32) / 255.
 

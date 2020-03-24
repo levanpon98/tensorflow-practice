@@ -1,5 +1,5 @@
 import tensorflow as tf
-from inception_module import InceptionModule1, Preprocess, InceptionModule3, InceptionModule2, InceptionModule4, \
+from .inception_module import InceptionModule1, Preprocess, InceptionModule3, InceptionModule2, InceptionModule4, \
     InceptionModule5, InceptionAux, BasicConv2D
 from collections import namedtuple
 
@@ -35,12 +35,8 @@ class InceptionV3(tf.keras.Model):
             InceptionModule5(),
         ])
 
-        self.maxpool = tf.keras.layers.MaxPool2D((8, 8), strides=1, padding='same')
+        self.avgpool = tf.keras.layers.AvgPool2D((8, 8), strides=1, padding='same')
         self.dropout = tf.keras.layers.Dropout(rate=0.4)
-        self.conv2d = BasicConv2D(filters=1000,
-                                  kernel_size=(1, 1),
-                                  strides=1,
-                                  padding='valid')
         self.flatten = tf.keras.layers.Flatten()
         self.fc = tf.keras.layers.Dense(units=num_class, activation=tf.keras.activations.relu)
 
@@ -50,8 +46,8 @@ class InceptionV3(tf.keras.Model):
         x = self.block2(x, training=training)
         if include_aux_logits and self.aux_logits:
             aux = self.AuxLogits(x)
-        x = self.block_3(x, training=training)
-        x = self.avg_pool(x)
+        x = self.block3(x, training=training)
+        x = self.avgpool(x)
         x = self.dropout(x, training=training)
         x = self.flatten(x)
         x = self.fc(x)
