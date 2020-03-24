@@ -18,8 +18,7 @@ def get_image_label(dataset_dir):
 
 
 def preprocess_data(image_path, image_label):
-
-    image_raw = tf.io.read_file(image_path)
+    image_raw = tf.io.gfile.GFile(image_path, 'rb').read()
     image_tensor = tf.image.decode_jpeg(image_raw, channels=config.channels)
 
     image_tensor = tf.image.resize(image_tensor, [config.image_height, config.image_width])
@@ -45,4 +44,4 @@ def build_dataset():
     test_dataset = test_dataset.batch(config.BATCH_SIZE)
     valid_dataset = valid_dataset.batch(config.BATCH_SIZE)
 
-    return train_dataset, train_count, test_dataset, test_count, valid_dataset, valid_count
+    return train_dataset, valid_dataset, test_dataset, train_count, valid_count, test_count
