@@ -97,7 +97,7 @@ def main():
                                                                   valid_accuracy.result()))
 
         with train_summary.as_default():
-            tf.summary.scalar('train loss', train_loss, step=epoch)
+            tf.summary.scalar('train loss', train_loss.result(), step=epoch)
             tf.summary.scalar('train accuracy', train_accuracy.result(), step=epoch)
         with test_summary.as_default():
             tf.summary.scalar('valid loss', valid_loss.result(), step=epoch)
