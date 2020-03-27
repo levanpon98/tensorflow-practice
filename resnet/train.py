@@ -64,7 +64,7 @@ def train_step(images, labels):
     optimizers.apply_gradients(grads_and_vars=zip(gradients, model.trainable_variables))
 
     train_loss(loss)
-    train_accuracy(labels, predictions.logits)
+    train_accuracy(labels, predictions)
 
 
 @tf.function
