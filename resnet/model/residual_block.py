@@ -67,10 +67,10 @@ class BottleNeck(tf.keras.layers.Layer):
         x = self.conv1(inputs)
         x = self.bn1(x, training=training)
         x = tf.nn.relu(x)
-        x = self.conv2(inputs)
+        x = self.conv2(x)
         x = self.bn2(x, training=training)
         x = tf.nn.relu(x)
-        x = self.conv3(inputs)
+        x = self.conv3(x)
         x = self.bn3(x, training=training)
 
         x = tf.nn.relu(tf.keras.layers.add([residual, x]))

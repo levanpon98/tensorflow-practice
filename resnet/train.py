@@ -7,15 +7,15 @@ import datetime
 
 
 def get_model():
-    if config.model == 'resnet_18':
+    if config.model == 'resnet18':
         model = resnet.resnet_18(config.NUM_CLASSES)
-    elif config.model == 'resnet_34':
+    elif config.model == 'resnet34':
         model = resnet.resnet_34(config.NUM_CLASSES)
 
-    elif config.model == 'resnet_50':
+    elif config.model == 'resnet50':
         model = resnet.resnet_50(config.NUM_CLASSES)
 
-    elif config.model == 'resnet_101':
+    elif config.model == 'resnet101':
         model = resnet.resnet_101(config.NUM_CLASSES)
 
     else:
