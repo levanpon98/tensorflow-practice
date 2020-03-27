@@ -21,6 +21,8 @@ def get_model():
     else:
         model = resnet.resnet_152(config.NUM_CLASSES)
 
+    model.build(input_shape=(None, config.image_height, config.image_width, config.channels))
+    model.summary()
     return model
 
 
@@ -69,7 +71,7 @@ def train_step(images, labels):
 
 @tf.function
 def valid_step(images, labels):
-    predictions = model(images, include_aux_logits=False, training=False)
+    predictions = model(images, training=False)
     v_loss = loss_object(labels, predictions)
 
     valid_loss(v_loss)

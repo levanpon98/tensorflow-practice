@@ -9,4 +9,4 @@ dataset_dir = "dataset/"
 train_dir = dataset_dir + "train"
 valid_dir = dataset_dir + "valid"
 test_dir = dataset_dir + "test"
-model = 'resnet18'
+model = 'resnet50'
