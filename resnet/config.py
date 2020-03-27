@@ -1,6 +1,6 @@
 EPOCHS = 50
 BATCH_SIZE = 8
-NUM_CLASSES = 67
+NUM_CLASSES = 5
 image_height = 299
 image_width = 299
 channels = 3

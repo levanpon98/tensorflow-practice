@@ -115,3 +115,7 @@ val2017*
 *.txt
 inception_v3/original_dataset
 inception_v3/dataset
+inception_v3/logs
+
+resnet/original_dataset
+resnet/dataset
