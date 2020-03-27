@@ -58,7 +58,7 @@ test_summary = tf.summary.create_file_writer(test_log_dir)
 @tf.function
 def train_step(images, labels):
     with tf.GradientTape() as tape:
-        predictions = model(images, include_aux_logits=True, training=True)
+        predictions = model(images, training=True)
         loss = loss_object(y_true=labels, y_pred=predictions)
     gradients = tape.gradient(loss, model.trainable_variables)
     optimizers.apply_gradients(grads_and_vars=zip(gradients, model.trainable_variables))
