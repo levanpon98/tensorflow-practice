@@ -51,7 +51,7 @@ class BottleNeck(tf.keras.layers.Layer):
                                             strides=strides,
                                             padding='same')
         self.bn2 = tf.keras.layers.BatchNormalization()
-        self.conv3 = tf.keras.layers.Conv2D(filters=filters,
+        self.conv3 = tf.keras.layers.Conv2D(filters=filters * 4,
                                             kernel_size=(1, 1),
                                             strides=1,
                                             padding='same')
